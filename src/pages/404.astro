@@ -1,11 +1,15 @@
 ---
 import Base from '@/layouts/Base.astro';
+import { paginas } from '@/data/paginas';
 ---
 
-<Base title="Página não encontrada | CFC Querência" description="Esta página não existe.">
+<Base title="Página não encontrada | CFC Querência" description="Esta página não existe." semIndexar>
   <section class="container-site py-24 text-center">
     <h1 class="titulo-secao">Ops, essa página saiu da pista</h1>
-    <p class="mt-4 text-slate-600">O endereço pode ter mudado.</p>
+    <p class="mt-4 text-slate-600">O endereço pode ter mudado. Talvez você esteja procurando:</p>
+    <ul class="mt-6 flex flex-wrap justify-center gap-3">
+      {paginas.map((p) => <li><a href={`/${p.slug}/`} class="btn border-2 border-slate-300 hover:border-marca">{p.nome}</a></li>)}
+    </ul>
     <a href="/" class="btn-destaque mt-8">Voltar para o início</a>
   </section>
 </Base>

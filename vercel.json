@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/autoescola-querencia", "destination": "/", "permanent": true },
+    { "source": "/servicos", "destination": "/", "permanent": true },
+    { "source": "/renovacao-de-cnh", "destination": "/", "permanent": true },
+    { "source": "/elementor-hf/:pagina*", "destination": "/", "permanent": true }
+  ]
+}

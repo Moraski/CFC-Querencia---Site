@@ -11,17 +11,22 @@ interface Props {
   description: string;
   /** Dados estruturados extras para o Google (ex.: FAQ). */
   schema?: Record<string, unknown>[];
+  /** true = pede para o Google não mostrar esta página (ex.: a 404). */
+  semIndexar?: boolean;
 }
 
-const { title, description, schema = [] } = Astro.props;
+const { title, description, schema = [], semIndexar = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 
 // Diz ao Google que somos uma autoescola local, com endereço e horário.
 const negocioLocal = {
   '@context': 'https://schema.org',
   '@type': 'DrivingSchool',
+  '@id': `${site.url}/#autoescola`, // as páginas de serviço apontam para cá
   name: site.nome,
-  url: site.url,
+  alternateName: ['Auto Escola Querência', 'Autoescola Querência'],
+  url: `${site.url}/`,
+  logo: new URL('/icon-192.png', site.url).href,
   telephone: `+${site.whatsapp}`,
   image: new URL('/og.jpg', site.url).href,
   foundingDate: String(site.fundacao),
@@ -32,6 +37,9 @@ const negocioLocal = {
     addressRegion: site.endereco.estado,
     addressCountry: 'BR',
   },
+  hasMap: site.endereco.mapa,
+  areaServed: { '@type': 'City', name: `${site.endereco.cidade}, ${site.endereco.estado}` },
+  priceRange: 'R$',
   openingHours: ['Mo-Fr 07:30-11:30', 'Mo-Fr 13:00-18:00', 'Sa 07:30-11:30'],
   sameAs: [`https://instagram.com/${site.instagram}`],
 };
@@ -44,7 +52,7 @@ const negocioLocal = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {semIndexar ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -59,6 +67,10 @@ const negocioLocal = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL('/og.jpg', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={site.nome} />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
