@@ -1,0 +1,102 @@
+@import 'tailwindcss';
+
+/* Cores e fontes da marca. Trocar aqui muda o site inteiro.
+   Vermelho é a identidade do CFC (carros, prédio, uniformes).
+   Contraste conferido (WCAG): branco sobre --color-marca = 8,4:1 e amarelo = 5,4:1 (mínimo é 4,5:1). */
+@theme {
+  --color-marca: #9b111e;        /* vermelho oficial do CFC */
+  --color-marca-escura: #6b0b14; /* rodapé e hover */
+  --color-destaque: #ffc72c;     /* amarelo: só em botões (texto escuro) e títulos grandes */
+  --color-destaque-escuro: #e6ac00;
+  --color-whatsapp: #25d366;      /* verde oficial: só no ícone flutuante */
+  --color-whatsapp-escuro: #15803d; /* botões com texto: branco sobre ele = 5:1 */
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-slate-800 antialiased;
+}
+
+/* Classes reutilizáveis (no Tailwind 4 elas são declaradas com @utility) */
+@utility container-site {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+}
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 font-semibold transition;
+}
+@utility btn-destaque {
+  @apply btn bg-destaque text-slate-900 hover:bg-destaque-escuro;
+}
+@utility btn-whatsapp {
+  @apply btn bg-whatsapp-escuro text-white hover:brightness-110;
+}
+@utility btn-contorno {
+  @apply btn border-2 border-current hover:bg-white/10;
+}
+@utility titulo-secao {
+  @apply text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl;
+}
+
+/* ---------- Detalhes visuais ---------- */
+
+/* Listras diagonais bem sutis, lembrando faixa de pista */
+.faixa-pista {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 28px,
+    rgb(255 255 255 / 0.035) 28px 56px
+  );
+}
+
+/* Linha tracejada amarela, como a faixa do meio da estrada */
+.estrada {
+  background: #1f2937
+    repeating-linear-gradient(90deg, var(--color-destaque) 0 40px, transparent 40px 70px) center / 100% 3px no-repeat;
+}
+
+/* ---------- Animações ---------- */
+/* Só animam se o navegador rodar JS (classe .js no <html>) e se a pessoa não pediu
+   "reduzir movimento" no celular. Sem isso, tudo aparece normalmente. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Entrada do topo ao carregar a página */
+  .entrada {
+    animation: subir 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .entrada-2 {
+    animation-delay: 0.15s;
+  }
+  .carimbo {
+    animation: carimbar 0.5s 0.8s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  }
+
+  /* Elementos com data-reveal surgem ao rolar a página */
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--atraso, 0ms);
+  }
+  .js [data-reveal].visivel {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+@keyframes carimbar {
+  from {
+    opacity: 0;
+    transform: scale(2) rotate(-12deg);
+  }
+}

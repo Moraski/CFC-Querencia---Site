@@ -1,0 +1,63 @@
+---
+// Galeria com fotos reais do CFC. Para trocar uma foto, coloque o arquivo em
+// src/assets/fotos/ e mude o import. O Astro gera versões leves (WebP) sozinho.
+import { Image } from 'astro:assets';
+import instrutorFrota from '@/assets/fotos/instrutor-frota.jpg';
+import aulaMoto from '@/assets/fotos/aula-moto.jpg';
+import carro from '@/assets/fotos/carro-autoescola.jpg';
+import motoDupla from '@/assets/fotos/aula-moto-dupla.jpg';
+---
+
+<section class="container-site py-16 sm:py-20">
+  <div class="max-w-2xl" data-reveal>
+    <h2 class="titulo-secao">Estrutura de quem leva a sério</h2>
+    <p class="mt-3 text-slate-600">
+      Carros e motos próprios, pista de treino com o circuito da prova e instrutores que estão com a gente há anos.
+    </p>
+  </div>
+
+  <div class="mt-10 grid gap-4 md:grid-cols-4 md:grid-rows-2">
+    <figure class="group relative overflow-hidden rounded-3xl md:col-span-2 md:row-span-2" data-reveal>
+      <Image
+        src={instrutorFrota}
+        alt="Instrutor do CFC Querência ao lado da frota de carros vermelhos"
+        widths={[480, 800, 1152]}
+        sizes="(min-width: 768px) 50vw, 100vw"
+        class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+      />
+      <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-5 pt-16 font-semibold text-white">
+        Frota própria, revisada e identificada
+      </figcaption>
+    </figure>
+    <figure class="group relative overflow-hidden rounded-3xl md:col-span-2" data-reveal style="--atraso: 100ms">
+      <Image
+        src={aulaMoto}
+        alt="Aluna em aula prática de moto na pista com cones"
+        widths={[480, 800]}
+        sizes="(min-width: 768px) 50vw, 100vw"
+        class="aspect-[16/9] h-full w-full object-cover transition duration-700 group-hover:scale-105"
+      />
+      <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-5 pt-16 font-semibold text-white">
+        Treino no circuito da prova de moto
+      </figcaption>
+    </figure>
+    <figure class="group relative overflow-hidden rounded-3xl" data-reveal style="--atraso: 200ms">
+      <Image
+        src={carro}
+        alt="Carro da autoescola CFC Querência na pista de treino"
+        widths={[400, 638]}
+        sizes="(min-width: 768px) 25vw, 100vw"
+        class="aspect-square h-full w-full object-cover transition duration-700 group-hover:scale-105"
+      />
+    </figure>
+    <figure class="group relative overflow-hidden rounded-3xl" data-reveal style="--atraso: 300ms">
+      <Image
+        src={motoDupla}
+        alt="Dois alunos em aula prática de moto"
+        widths={[400, 638]}
+        sizes="(min-width: 768px) 25vw, 100vw"
+        class="aspect-square h-full w-full object-cover transition duration-700 group-hover:scale-105"
+      />
+    </figure>
+  </div>
+</section>

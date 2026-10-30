@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import { BadgeCheck, ShieldCheck } from '@lucide/astro';
+import fotoFrota from '@/assets/fotos/frota-por-do-sol.jpg';
+import { site, anosDeExperiencia } from '@/data/site';
+import { linkWhatsApp } from '@/lib/whatsapp';
+---
+
+<section class="faixa-pista relative overflow-hidden bg-marca pb-24 text-white">
+  <div class="absolute -top-40 -left-40 size-[32rem] rounded-full bg-white/10 blur-3xl" aria-hidden="true"></div>
+
+  <div class="container-site relative grid gap-12 pt-14 sm:pt-20 md:grid-cols-[1fr_1.05fr] md:items-center">
+    <div class="entrada">
+      <p class="mb-5 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm font-semibold ring-1 ring-white/20">
+        <ShieldCheck class="size-4" /> Autoescola em {site.endereco.cidade}-{site.endereco.estado} há {anosDeExperiencia} anos
+      </p>
+      <h1 class="text-4xl leading-[1.1] font-extrabold tracking-tight sm:text-6xl">
+        Tire sua CNH com <span class="text-destaque">segurança</span> e sem enrolação
+      </h1>
+      <p class="mt-6 max-w-lg text-lg text-white/90">
+        Agora você escolhe quantas aulas quer fazer. Planos de moto e carro a partir de R$ 1.150, em até 6x no cartão.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#planos" class="btn-destaque shadow-lg shadow-black/20">Ver planos e preços</a>
+        <a href={linkWhatsApp()} class="btn-contorno">Falar no WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="entrada entrada-2 relative">
+      <div class="absolute inset-0 translate-x-3 translate-y-3 rotate-2 rounded-[2rem] bg-white/15" aria-hidden="true"></div>
+      <Image
+        src={fotoFrota}
+        alt="Frota de carros vermelhos da autoescola CFC Querência ao pôr do sol"
+        widths={[480, 800, 1152]}
+        sizes="(min-width: 768px) 50vw, 100vw"
+        loading="eager"
+        fetchpriority="high"
+        class="relative aspect-[4/3] w-full rounded-[2rem] object-cover shadow-2xl shadow-black/40"
+      />
+      <span class="carimbo absolute -bottom-5 -left-3 flex rotate-[-8deg] items-center gap-1.5 rounded-xl border-4 border-destaque bg-white px-3 py-1.5 text-base font-extrabold tracking-wider text-slate-900 uppercase shadow-lg sm:text-lg">
+        <BadgeCheck class="size-5 text-marca" /> +{site.numeros.aprovados.toLocaleString('pt-BR')} aprovados
+      </span>
+    </div>
+  </div>
+
+  <div class="estrada absolute inset-x-0 bottom-0 h-3" aria-hidden="true"></div>
+</section>

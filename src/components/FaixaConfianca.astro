@@ -1,0 +1,31 @@
+---
+import { site, anosDeExperiencia } from '@/data/site';
+
+// `numero` é animado de 0 até o valor quando aparece na tela (ver script em Base.astro).
+const itens = [
+  { numero: anosDeExperiencia, sufixo: ' anos', rotulo: 'formando condutores' },
+  { numero: site.numeros.aprovados, prefixo: '+', rotulo: 'alunos aprovados' },
+  { numero: site.numeros.premios, sufixo: ' prêmios', rotulo: 'Melhores do Ano ACEQ' },
+];
+---
+
+<section class="relative z-10 -mt-10">
+  <ul class="container-site grid grid-cols-2 gap-4 md:grid-cols-4" data-reveal>
+    {
+      itens.map((item) => (
+        <li class="rounded-3xl bg-white p-5 text-center shadow-xl shadow-slate-900/5 ring-1 ring-slate-100">
+          <p class="text-3xl font-extrabold text-marca">
+            {item.prefixo}
+            <span data-contar={item.numero}>{item.numero.toLocaleString('pt-BR')}</span>
+            {item.sufixo}
+          </p>
+          <p class="text-sm text-slate-600">{item.rotulo}</p>
+        </li>
+      ))
+    }
+    <li class="rounded-3xl bg-white p-5 text-center shadow-xl shadow-slate-900/5 ring-1 ring-slate-100">
+      <p class="text-3xl font-extrabold text-marca">Detran-MT</p>
+      <p class="text-sm text-slate-600">CFC credenciado</p>
+    </li>
+  </ul>
+</section>

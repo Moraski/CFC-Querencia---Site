@@ -1,0 +1,85 @@
+---
+import { Check, Motorbike, CarFront } from '@lucide/astro';
+import { planos, incluidoEmTodos, formatarReais, validadePrecos } from '@/data/pacotes';
+import { linkWhatsApp } from '@/lib/whatsapp';
+import Calculadora from '@/components/Calculadora';
+---
+
+<section id="planos" class="container-site scroll-mt-20 py-16 sm:py-20">
+  <div data-reveal>
+    <h2 class="titulo-secao text-center">Planos de aula prática</h2>
+    <p class="mx-auto mt-3 max-w-2xl text-center text-slate-600">
+      Primeira habilitação de moto e carro (AB). Escolha um plano pronto ou monte o seu na hora da matrícula. Exames e taxas do Detran são pagos à parte.
+    </p>
+  </div>
+
+  <ul class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      planos.map((p, i) => (
+        <li
+          data-reveal
+          style={`--atraso: ${i * 100}ms`}
+          class:list={[
+            'relative flex flex-col rounded-3xl border bg-white p-6',
+            p.destaque ? 'border-marca shadow-2xl shadow-marca/20 ring-2 ring-marca lg:-translate-y-3' : 'border-slate-200',
+          ]}
+        >
+          {p.destaque && (
+            <span class="absolute -top-3 left-6 rounded-full bg-destaque px-3 py-1 text-xs font-bold text-slate-900">
+              Recomendado
+            </span>
+          )}
+          <h3 class="text-xl font-extrabold text-slate-900">{p.nome}</h3>
+
+          <div class="mt-4 flex gap-3">
+            <span class="flex flex-1 flex-col items-center rounded-2xl bg-slate-50 py-3">
+              <Motorbike class="size-6 text-marca" />
+              <strong class="mt-1 text-2xl text-slate-900">{p.aulasMoto}</strong>
+              <span class="text-xs text-slate-600">aulas de moto</span>
+            </span>
+            <span class="flex flex-1 flex-col items-center rounded-2xl bg-slate-50 py-3">
+              <CarFront class="size-6 text-marca" />
+              <strong class="mt-1 text-2xl text-slate-900">{p.aulasCarro}</strong>
+              <span class="text-xs text-slate-600">aulas de carro</span>
+            </span>
+          </div>
+
+          <ul class="mt-4 flex-1 space-y-1.5 text-sm">
+            {incluidoEmTodos.map((item) => (
+              <li class="flex gap-2">
+                <Check class="mt-0.5 size-4 shrink-0 text-marca" /> {item}
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-6 border-t border-slate-100 pt-4">
+            <p class="text-sm text-slate-600">à vista</p>
+            <p class="text-3xl font-extrabold text-slate-900">{formatarReais(p.aVista, 0)}</p>
+            <p class="mt-1 text-sm text-slate-600">
+              ou {p.parcelas}x de {formatarReais(p.cartao / p.parcelas)} no cartão
+            </p>
+          </div>
+
+          <a
+            href={linkWhatsApp(`Olá! Quero o plano ${p.nome} (${p.aulasMoto} aulas de moto + ${p.aulasCarro} de carro).`)}
+            class:list={['mt-6', p.destaque ? 'btn-destaque' : 'btn border-2 border-slate-300 hover:border-marca']}
+          >
+            Quero este plano
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="mt-8 text-center text-slate-600" data-reveal>
+    Quer só moto, só carro ou outra quantidade de aulas?
+    <a href={linkWhatsApp('Olá! Quero montar um plano personalizado de aulas práticas.')} class="font-semibold text-marca underline">
+      Monte seu plano pelo WhatsApp
+    </a>
+  </p>
+
+  <p class="mt-3 text-center text-xs text-slate-500">Valores válidos em {validadePrecos}.</p>
+
+  <!-- client:visible = o React só é baixado quando a calculadora aparece na tela -->
+  <Calculadora client:visible />
+</section>

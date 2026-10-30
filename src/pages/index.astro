@@ -1,0 +1,40 @@
+---
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/Hero.astro';
+import FaixaConfianca from '@/components/FaixaConfianca.astro';
+import Estrutura from '@/components/Estrutura.astro';
+import ComoFunciona from '@/components/ComoFunciona.astro';
+import Pacotes from '@/components/Pacotes.astro';
+import Diferenciais from '@/components/Diferenciais.astro';
+import Avaliacoes from '@/components/Avaliacoes.astro';
+import Duvidas from '@/components/Duvidas.astro';
+import Contato from '@/components/Contato.astro';
+import { faq } from '@/data/faq';
+
+// FAQ em formato que o Google entende (pode aparecer direto nos resultados de busca).
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.pergunta,
+    acceptedAnswer: { '@type': 'Answer', text: f.resposta },
+  })),
+};
+---
+
+<Base
+  title="Autoescola em Querência-MT: CNH de moto e carro | CFC Querência"
+  description="Primeira habilitação de moto e carro em Querência-MT. Planos a partir de R$ 1.150, em até 6x no cartão. 11 prêmios Melhores do Ano ACEQ. Fale pelo WhatsApp."
+  schema={[faqSchema]}
+>
+  <Hero />
+  <FaixaConfianca />
+  <ComoFunciona />
+  <Pacotes />
+  <Diferenciais />
+  <Estrutura />
+  <Avaliacoes />
+  <Duvidas />
+  <Contato />
+</Base>

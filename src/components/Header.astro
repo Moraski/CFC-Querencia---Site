@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import logo from '@/assets/logo.png';
+import { linkWhatsApp } from '@/lib/whatsapp';
+
+const menu = [
+  { texto: 'Como funciona', href: '/#como-funciona' },
+  { texto: 'Planos', href: '/#planos' },
+  { texto: 'Dúvidas', href: '/#duvidas' },
+  { texto: 'Contato', href: '/#contato' },
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+  <div class="container-site flex h-16 items-center justify-between gap-4">
+    <a href="/" aria-label="CFC Querência, página inicial">
+      <!-- TODO: trocar por uma versão em SVG do logo quando tiver -->
+      <Image src={logo} alt="Auto Escola CFC Querência" class="h-9 w-auto sm:h-10" loading="eager" />
+    </a>
+
+    <nav aria-label="Principal" class="hidden md:block">
+      <ul class="flex gap-6 font-semibold text-slate-700">
+        {menu.map((item) => <li><a href={item.href} class="hover:text-marca">{item.texto}</a></li>)}
+      </ul>
+    </nav>
+
+    <a href={linkWhatsApp()} class="btn-whatsapp hidden min-h-10 px-4 text-sm md:inline-flex">
+      Falar no WhatsApp
+    </a>
+  </div>
+</header>

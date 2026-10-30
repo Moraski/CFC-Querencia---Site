@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import { MapPin, Clock } from '@lucide/astro';
+import fachada from '@/assets/fotos/fachada.jpg';
+import { site } from '@/data/site';
+import { linkWhatsApp } from '@/lib/whatsapp';
+
+// Mapa incorporado do Google sem precisar de chave de API
+const mapaEmbed = `https://www.google.com/maps?q=${encodeURIComponent(site.endereco.busca)}&output=embed`;
+---
+
+<section id="contato" class="scroll-mt-20 bg-slate-50 py-16 sm:py-20">
+  <div class="container-site grid gap-10 md:grid-cols-2">
+    <div data-reveal>
+      <h2 class="titulo-secao">Comece hoje</h2>
+      <p class="mt-3 text-slate-600">Chame no WhatsApp ou venha conhecer a gente.</p>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href={linkWhatsApp()} class="btn-whatsapp">WhatsApp {site.whatsappFormatado}</a>
+        <a href={`https://www.instagram.com/${site.instagram}/`} class="btn border-2 border-slate-300 hover:border-marca">
+          <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+          </svg> @{site.instagram}
+        </a>
+      </div>
+
+      <div class="mt-8 space-y-5 text-slate-700">
+        <p class="flex gap-3">
+          <MapPin class="mt-0.5 size-5 shrink-0 text-marca" />
+          <span>
+            {site.endereco.rua}<br />
+            {site.endereco.referencia} · {site.endereco.cidade}-{site.endereco.estado}<br />
+            <a href={site.endereco.mapa} class="font-semibold text-marca underline">Abrir no Google Maps</a>
+          </span>
+        </p>
+        <div class="flex gap-3">
+          <Clock class="mt-0.5 size-5 shrink-0 text-marca" />
+          <ul>
+            {site.horarios.map((h) => <li><strong class="text-slate-900">{h.dias}:</strong> {h.horas}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <Image
+        src={fachada}
+        alt="Fachada do CFC Querência"
+        widths={[400, 800]}
+        sizes="(min-width: 768px) 40vw, 100vw"
+        class="mt-8 aspect-[16/9] w-full rounded-3xl object-cover"
+      />
+    </div>
+
+    <iframe
+      src={mapaEmbed}
+      title="Mapa: localização do CFC Querência"
+      class="min-h-96 w-full rounded-3xl border-0 shadow-sm"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      data-reveal></iframe>
+  </div>
+</section>

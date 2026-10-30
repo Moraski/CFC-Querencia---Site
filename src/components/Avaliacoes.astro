@@ -1,0 +1,47 @@
+---
+import { Star, Quote } from '@lucide/astro';
+import { avaliacoes, exemplos, google } from '@/data/avaliacoes';
+
+// No site publicado só aparecem avaliações reais. No `npm run dev` mostramos exemplos
+// para dar para ver o layout enquanto as reais não chegam.
+const modoExemplo = avaliacoes.length === 0 && import.meta.env.DEV;
+const lista = avaliacoes.length > 0 ? avaliacoes : modoExemplo ? exemplos : [];
+---
+
+{
+  lista.length > 0 && (
+    <section class="container-site py-16 sm:py-20">
+      {modoExemplo && (
+        <p class="mb-6 rounded-xl bg-amber-50 p-3 text-center text-sm text-amber-900">
+          Exemplos para visualizar o layout. Só aparecem no modo dev. Preencha src/data/avaliacoes.ts com avaliações reais.
+        </p>
+      )}
+      <div class="flex flex-col items-center gap-3 text-center" data-reveal>
+        <h2 class="titulo-secao">Quem tirou a CNH com a gente</h2>
+        {google.nota && (
+          <a href={google.link} class="flex items-center gap-2 text-slate-700 hover:text-marca">
+            <span class="flex text-destaque">
+              {Array.from({ length: 5 }).map(() => <Star class="size-5 fill-current" />)}
+            </span>
+            <strong>{google.nota.toLocaleString('pt-BR')}</strong> no Google
+            {google.total && <span>({google.total} avaliações)</span>}
+          </a>
+        )}
+      </div>
+      <ul class="mt-10 grid gap-6 md:grid-cols-3">
+        {lista.map((a, i) => (
+          <li class="relative rounded-3xl border border-slate-200 bg-white p-6" data-reveal style={`--atraso: ${i * 100}ms`}>
+            <Quote class="absolute top-5 right-5 size-8 text-marca/15" />
+            <span class="flex text-destaque" aria-label={`${a.estrelas} de 5 estrelas`}>
+              {Array.from({ length: a.estrelas }).map(() => <Star class="size-4 fill-current" />)}
+            </span>
+            <p class="mt-4 text-slate-700">“{a.texto}”</p>
+            <p class="mt-4 text-sm font-semibold text-slate-900">
+              {a.nome} {a.quando && <span class="font-normal text-slate-500">· {a.quando}</span>}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

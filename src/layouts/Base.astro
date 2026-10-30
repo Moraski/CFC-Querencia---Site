@@ -1,0 +1,113 @@
+---
+// Layout base: tudo que vai em TODAS as páginas (head, SEO, cabeçalho, rodapé).
+import '@/styles/global.css';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsAppFixo from '@/components/WhatsAppFixo.astro';
+import { site } from '@/data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Dados estruturados extras para o Google (ex.: FAQ). */
+  schema?: Record<string, unknown>[];
+}
+
+const { title, description, schema = [] } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+
+// Diz ao Google que somos uma autoescola local, com endereço e horário.
+const negocioLocal = {
+  '@context': 'https://schema.org',
+  '@type': 'DrivingSchool',
+  name: site.nome,
+  url: site.url,
+  telephone: `+${site.whatsapp}`,
+  image: new URL('/og.jpg', site.url).href,
+  foundingDate: String(site.fundacao),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.endereco.rua,
+    addressLocality: site.endereco.cidade,
+    addressRegion: site.endereco.estado,
+    addressCountry: 'BR',
+  },
+  openingHours: ['Mo-Fr 07:30-11:30', 'Mo-Fr 13:00-18:00', 'Sa 07:30-11:30'],
+  sameAs: [`https://instagram.com/${site.instagram}`],
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Como o link aparece quando compartilhado no WhatsApp/Instagram -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/og.jpg', Astro.site)} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Marca que o JS está ativo, para as animações não esconderem nada se ele falhar -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
+
+    <script type="application/ld+json" set:html={JSON.stringify([negocioLocal, ...schema])} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFixo />
+
+    <script>
+      // Faz os elementos com data-reveal surgirem quando entram na tela
+      // e os números com data-contar contarem de 0 até o valor.
+      const reduzirMovimento = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function contar(el: HTMLElement) {
+        const alvo = Number(el.dataset.contar);
+        const duracao = 1200;
+        const inicio = performance.now();
+        const passo = (agora: number) => {
+          const t = Math.min((agora - inicio) / duracao, 1);
+          const suave = 1 - Math.pow(1 - t, 3); // começa rápido e desacelera
+          el.textContent = Math.round(alvo * suave).toLocaleString('pt-BR');
+          if (t < 1) requestAnimationFrame(passo);
+        };
+        requestAnimationFrame(passo);
+      }
+
+      const observador = new IntersectionObserver(
+        (entradas) => {
+          for (const entrada of entradas) {
+            if (!entrada.isIntersecting) continue;
+            const el = entrada.target as HTMLElement;
+            el.classList.add('visivel');
+            if (!reduzirMovimento) el.querySelectorAll<HTMLElement>('[data-contar]').forEach(contar);
+            observador.unobserve(el);
+          }
+        },
+        { threshold: 0.15 },
+      );
+
+      document.querySelectorAll('[data-reveal]').forEach((el) => observador.observe(el));
+    </script>
+  </body>
+</html>
