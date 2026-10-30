@@ -1,0 +1,20 @@
+# Regras do servidor da Hostinger (Apache/LiteSpeed).
+# Na Vercel quem faz isso é o vercel.json. Mudou um, mude o outro.
+
+ErrorDocument 404 /404.html
+
+RewriteEngine On
+
+# Sempre https e sem "www", para o Google ver um endereço só.
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://cfcquerencia.com%{REQUEST_URI} [L,R=301]
+
+# Páginas do WordPress antigo que não existem mais vão para a home (301 = mudou de vez).
+# /primeira-habilitacao/ e /adicao-de-categoria/ continuam existindo com o mesmo endereço.
+RewriteRule ^(autoescola-querencia|servicos|renovacao-de-cnh)/?$ / [L,R=301]
+RewriteRule ^elementor-hf(/.*)?$ / [L,R=301]
+RewriteRule ^feed/?$ / [L,R=301]
+
+# Sitemaps do Yoast apontam para o sitemap novo.
+RewriteRule ^(sitemap_index|page-sitemap|elementor-hf-sitemap)\.xml$ /sitemap-index.xml [L,R=301]
