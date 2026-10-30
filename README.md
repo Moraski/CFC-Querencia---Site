@@ -61,14 +61,4 @@ Procure por `TODO` no projeto para ver tudo que ainda falta preencher (preços, 
 
 ## Publicar
 
-**Teste:** a Vercel, ligada ao repositório do GitHub, publica uma versão de teste a cada `git push`.
-
-**Site oficial (Hostinger, no lugar do WordPress):**
-
-1. Rode `npm run build`. O site pronto fica na pasta `dist/`.
-2. No painel da Hostinger, abra o Gerenciador de Arquivos e faça backup do `public_html` atual (o WordPress).
-3. Apague o conteúdo do `public_html` e envie **todo o conteúdo** da pasta `dist/`, incluindo o arquivo oculto `.htaccess`.
-4. Abra cfcquerencia.com e teste. Os endereços antigos (`/primeira-habilitacao/`, `/renovacao-de-cnh/` etc.) redirecionam sozinhos para o site novo, pelo `.htaccess`.
-5. No Google Search Console (mesmo domínio, não precisa cadastrar de novo), envie o sitemap `https://cfcquerencia.com/sitemap-index.xml`.
-
-O Perfil da Empresa no Google (avaliações, mapa, horário) não muda nada: ele é ligado ao negócio, não ao site.
+O plano é hospedar de graça na Vercel, Netlify ou Cloudflare Pages ligada ao repositório do GitHub: cada `git push` publica uma nova versão. Depois é só apontar o domínio `cfcquerencia.com` para lá.
