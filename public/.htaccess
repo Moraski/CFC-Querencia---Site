@@ -11,8 +11,8 @@ RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^ https://cfcquerencia.com%{REQUEST_URI} [L,R=301]
 
 # Páginas do WordPress antigo que não existem mais vão para a home (301 = mudou de vez).
-# /primeira-habilitacao/ e /adicao-de-categoria/ continuam existindo com o mesmo endereço.
-RewriteRule ^(autoescola-querencia|servicos|renovacao-de-cnh)/?$ / [L,R=301]
+# /primeira-habilitacao/, /adicao-de-categoria/ e /renovacao-de-cnh/ continuam existindo com o mesmo endereço.
+RewriteRule ^(autoescola-querencia|servicos)/?$ / [L,R=301]
 RewriteRule ^elementor-hf(/.*)?$ / [L,R=301]
 RewriteRule ^feed/?$ / [L,R=301]
 

@@ -21,7 +21,7 @@ export interface PaginaServico {
   /** Se tiver, mostra o "a partir de" e os planos dessa categoria. */
   categoria?: Categoria;
   paraQuem: string[];
-  /** Passo a passo próprio. Sem ele, a página mostra o da primeira habilitação. */
+  /** Passo a passo próprio. Sem ele, páginas com `categoria` mostram o da primeira habilitação. */
   passos?: { titulo: string; texto: string }[];
   mensagemWhatsApp: string;
   duvidas: { pergunta: string; resposta: string }[];
@@ -124,22 +124,41 @@ export const paginas: PaginaServico[] = [
       'Quem tem CNH de carro (B) e quer pilotar moto (A)',
       'Quem tem CNH de moto (A) e quer dirigir carro (B)',
     ],
-    // TODO: conferir com o CFC se as etapas abaixo estão certas para o Detran-MT hoje.
-    passos: [
-      { titulo: 'Abertura do processo', texto: 'Aqui na autoescola, com a sua CNH atual em mãos.' },
-      { titulo: 'Exame médico', texto: 'Em Ribeirão Cascalheira. A gente explica tudo antes.' },
-      { titulo: 'Aulas práticas', texto: 'Você escolhe quantas aulas quer fazer na nova categoria.' },
-      { titulo: 'Prova prática', texto: 'Com o veículo da autoescola. Aprovado, a nova categoria entra na sua CNH.' },
-    ],
     mensagemWhatsApp: 'Olá! Vim pelo site e quero fazer adição de categoria.',
     duvidas: [
       {
-        pergunta: 'Preciso fazer a prova teórica de novo?',
-        resposta: 'Não. Quem já é habilitado faz só as etapas da nova categoria. Chame no WhatsApp que a gente confirma o seu caso.',
+        pergunta: 'Como funciona o processo?',
+        resposta: 'A gente cuida de tudo com você, da abertura do processo até a prova prática. Chame no WhatsApp que explicamos cada etapa para o seu caso.',
       },
       {
         pergunta: 'Quanto custa a adição de categoria?',
         resposta: 'Depende de quantas aulas você quiser fazer. Chame no WhatsApp que a gente passa o valor certinho.',
+      },
+    ],
+  },
+  {
+    slug: 'renovacao-de-cnh',
+    titulo: 'Renovação de CNH em Querência-MT | CFC Querência',
+    descricao:
+      'CNH vencida ou perto de vencer? Faça a renovação da sua carteira de motorista com o CFC Querência, em Querência-MT. Fale no WhatsApp.',
+    nome: 'Renovação de CNH',
+    h1: 'Renovação de CNH em Querência-MT',
+    chamada:
+      'Sua carteira venceu ou está perto de vencer? A gente cuida da renovação com você, sem complicação e sem perder tempo indo e voltando.',
+    paraQuem: [
+      'Quem está com a CNH vencida ou perto de vencer',
+      'Quem precisa da carteira em dia para trabalhar',
+      'Quem quer ajuda para não errar nenhuma etapa',
+    ],
+    mensagemWhatsApp: 'Olá! Vim pelo site e quero renovar minha CNH.',
+    duvidas: [
+      {
+        pergunta: 'Como funciona a renovação?',
+        resposta: 'Chame no WhatsApp com a sua CNH em mãos. A gente explica cada etapa e acompanha o processo com você.',
+      },
+      {
+        pergunta: 'Quanto custa renovar a CNH?',
+        resposta: 'Chame no WhatsApp que a gente passa o valor certinho para o seu caso.',
       },
     ],
   },

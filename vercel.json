@@ -13,11 +13,6 @@
       "permanent": true
     },
     {
-      "source": "/renovacao-de-cnh",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/elementor-hf/:pagina*",
       "destination": "/",
       "permanent": true
