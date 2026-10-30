@@ -2,11 +2,6 @@
 
 export const faq: { pergunta: string; resposta: string }[] = [
   {
-    pergunta: 'Ainda preciso de autoescola para tirar a CNH?',
-    resposta:
-      'Desde dezembro de 2025 a autoescola deixou de ser obrigatória e você escolhe quantas aulas práticas quer fazer. Os exames continuam obrigatórios. Com a gente você treina no carro e na moto da prova, com instrutores que conhecem o percurso, e recebe ajuda em todo o processo.',
-  },
-  {
     pergunta: 'Onde faço o curso teórico?',
     resposta:
       'O curso teórico é gratuito, pelo aplicativo CNH do Brasil. Depois de concluir, você abre o processo aqui na autoescola ou no Detran.',
