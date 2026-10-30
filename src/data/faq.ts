@@ -9,7 +9,7 @@ export const faq: { pergunta: string; resposta: string }[] = [
   {
     pergunta: 'Quanto custa no total?',
     resposta:
-      'Além do plano de aulas, existem as taxas: abertura do processo R$ 320,90, exame psicotécnico R$ 172,00, exame médico R$ 80,00 e exame toxicológico (cerca de R$ 180,00, obrigatório na primeira CNH desde 2026). Use a calculadora na seção de planos para ver o total do seu caso.',
+      'Além do plano de aulas, taxas e exames são pagos à parte: taxa do Detran R$ 263,90 (só carro) ou R$ 320,90 (moto + carro), exame psicotécnico R$ 172,00, exame médico R$ 80,00 e exame toxicológico R$ 150,00. Use a calculadora na seção de planos para ver o total do seu caso.',
   },
   {
     pergunta: 'Em que ordem faço os exames?',
@@ -19,12 +19,12 @@ export const faq: { pergunta: string; resposta: string }[] = [
   {
     pergunta: 'Quantas aulas práticas eu preciso?',
     resposta:
-      'Você escolhe. Temos planos de 2 a 15 aulas de cada categoria, ou você monta o seu na hora da matrícula. Quem nunca dirigiu costuma se sentir mais seguro a partir de 10 aulas.',
+      'Você escolhe. Temos planos de 2 a 15 aulas, ou você monta o seu na hora da matrícula. Quem nunca dirigiu costuma se sentir mais seguro a partir de 10 aulas.',
   },
   {
     pergunta: 'Posso parcelar?',
     resposta:
-      'Sim, no cartão de crédito. Os planos Básico e Complementar saem em até 4x, e os planos Intermediário e Avançado em até 6x.',
+      'Sim, no cartão de crédito. Moto + carro: Básico e Complementar em até 4x, Intermediário e Avançado em até 6x. Só carro: Básico e Complementar em até 4x e Intermediário em até 5x.',
   },
   {
     pergunta: 'Qual a idade mínima?',

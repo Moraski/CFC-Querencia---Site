@@ -1,21 +1,25 @@
-// Ilha React: o aluno escolhe um plano e a forma de pagamento e vê quanto vai gastar
-// no total, já somando as taxas do Detran e dos exames.
+// Ilha React: o aluno escolhe categoria, plano e forma de pagamento e vê quanto vai
+// gastar no total, já somando as taxas do Detran e dos exames.
 import { useState } from 'react';
-import { planos, taxas, totalTaxas, formatarReais } from '@/data/pacotes';
+import { categorias, planosDa, taxas, totalTaxas, formatarReais, type Categoria } from '@/data/pacotes';
 import { linkWhatsApp } from '@/lib/whatsapp';
 
 type Pagamento = 'aVista' | 'cartao';
 
 export default function Calculadora() {
-  const [planoId, setPlanoId] = useState('intermediario');
+  const [categoria, setCategoria] = useState<Categoria>('AB');
+  const [nomePlano, setNomePlano] = useState('Intermediário');
   const [pagamento, setPagamento] = useState<Pagamento>('aVista');
 
-  const plano = planos.find((p) => p.id === planoId) ?? planos[0];
+  const lista = planosDa(categoria);
+  // Se o plano escolhido não existe na categoria (ex.: Avançado só carro), usa o primeiro
+  const plano = lista.find((p) => p.nome === nomePlano) ?? lista[0];
   const valorPlano = plano[pagamento];
-  const total = valorPlano + totalTaxas;
+  const total = valorPlano + totalTaxas(categoria);
 
+  const aulas = (plano.aulasMoto ? `${plano.aulasMoto} moto + ` : '') + `${plano.aulasCarro} carro`;
   const mensagem =
-    `Olá! Fiz a simulação no site: plano ${plano.nome}, ` +
+    `Olá! Fiz a simulação no site: plano ${plano.nome} ${categorias[categoria].curto.toLowerCase()} (${aulas}), ` +
     (pagamento === 'aVista' ? 'à vista' : `no cartão em até ${plano.parcelas}x`) +
     `. Quero começar meu processo.`;
 
@@ -31,10 +35,21 @@ export default function Calculadora() {
         <p className="mt-1 text-sm text-slate-600">Plano de aulas + taxas do Detran e dos exames.</p>
 
         <fieldset className="mt-5">
+          <legend className="text-sm font-semibold text-slate-700">Categoria</legend>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {(Object.keys(categorias) as Categoria[]).map((c) => (
+              <button key={c} type="button" onClick={() => setCategoria(c)} aria-pressed={c === categoria} className={botao(c === categoria)}>
+                {categorias[c].curto}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset className="mt-5">
           <legend className="text-sm font-semibold text-slate-700">Plano</legend>
           <div className="mt-2 flex flex-wrap gap-2">
-            {planos.map((p) => (
-              <button key={p.id} type="button" onClick={() => setPlanoId(p.id)} aria-pressed={p.id === planoId} className={botao(p.id === planoId)}>
+            {lista.map((p) => (
+              <button key={p.id} type="button" onClick={() => setNomePlano(p.nome)} aria-pressed={p.id === plano.id} className={botao(p.id === plano.id)}>
                 {p.nome}
               </button>
             ))}
@@ -58,17 +73,14 @@ export default function Calculadora() {
         <dl className="space-y-2 text-sm">
           <div className="flex justify-between gap-4">
             <dt className="text-slate-600">
-              Plano {plano.nome} ({plano.aulasMoto} moto + {plano.aulasCarro} carro)
+              Plano {plano.nome} ({aulas})
             </dt>
             <dd className="font-semibold whitespace-nowrap">{formatarReais(valorPlano)}</dd>
           </div>
           {taxas.map((t) => (
             <div key={t.nome} className="flex justify-between gap-4">
               <dt className="text-slate-600">{t.nome}</dt>
-              <dd className="font-semibold whitespace-nowrap">
-                {t.aproximado && '~ '}
-                {formatarReais(t.valor)}
-              </dd>
+              <dd className="font-semibold whitespace-nowrap">{formatarReais(t.valor[categoria])}</dd>
             </div>
           ))}
         </dl>
@@ -81,7 +93,7 @@ export default function Calculadora() {
             plano em {plano.parcelas}x de {formatarReais(plano.cartao / plano.parcelas)}
           </p>
         )}
-        <p className="mt-3 text-xs text-slate-500">Exames e taxas do Detran são pagos à parte, direto ao Detran e às clínicas. O toxicológico varia conforme o laboratório.</p>
+        <p className="mt-3 text-xs text-slate-500">Taxas e exames são pagos à parte, direto ao Detran e às clínicas.</p>
         <a href={linkWhatsApp(mensagem)} className="btn-whatsapp mt-5 w-full">
           Começar meu processo
         </a>

@@ -24,7 +24,7 @@ export const passos = [
     titulo: 'Abertura do processo',
     icone: FileCheck,
     texto: 'Aqui na autoescola ou no Detran.',
-    valor: 'Taxa R$ 320,90',
+    valor: 'Taxa Detran: R$ 263,90 (carro) ou R$ 320,90 (moto + carro)',
   },
   {
     titulo: 'Exame psicotécnico',
@@ -43,7 +43,7 @@ export const passos = [
     titulo: 'Exame toxicológico',
     icone: FlaskConical,
     texto: 'Obrigatório na primeira CNH desde 2026. O resultado precisa sair antes da CNH provisória.',
-    valor: 'Cerca de R$ 180,00',
+    valor: 'R$ 150,00',
   },
   {
     titulo: 'Prova teórica',
