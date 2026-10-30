@@ -1,6 +1,5 @@
 ---
-import { Image } from 'astro:assets';
-import logo from '@/assets/logo.png';
+import Logo from '@/components/Logo.astro';
 import { linkWhatsApp } from '@/lib/whatsapp';
 
 const menu = [
@@ -11,21 +10,29 @@ const menu = [
 ];
 ---
 
-<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+<header class="sticky top-0 z-40 border-b border-slate-200/70 bg-white/90 backdrop-blur-md">
   <div class="container-site flex h-16 items-center justify-between gap-4">
     <a href="/" aria-label="CFC Querência, página inicial">
-      <!-- TODO: trocar por uma versão em SVG do logo quando tiver -->
-      <Image src={logo} alt="Auto Escola CFC Querência" class="h-9 w-auto sm:h-10" loading="eager" />
+      <Logo />
     </a>
 
     <nav aria-label="Principal" class="hidden md:block">
-      <ul class="flex gap-6 font-semibold text-slate-700">
-        {menu.map((item) => <li><a href={item.href} class="hover:text-marca">{item.texto}</a></li>)}
+      <ul class="flex gap-7 font-semibold text-slate-700">
+        {
+          menu.map((item) => (
+            <li>
+              <a href={item.href} class="relative py-1 transition hover:text-marca after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded after:bg-marca after:transition hover:after:scale-x-100">
+                {item.texto}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
 
-    <a href={linkWhatsApp()} class="btn-whatsapp hidden min-h-10 px-4 text-sm md:inline-flex">
-      Falar no WhatsApp
+    <a href={linkWhatsApp()} class="btn-whatsapp min-h-10 px-4 text-sm">
+      <span class="md:hidden">WhatsApp</span>
+      <span class="hidden md:inline">Falar no WhatsApp</span>
     </a>
   </div>
 </header>

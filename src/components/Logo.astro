@@ -1,0 +1,24 @@
+---
+// Logo do site: o ícone "CFC" + o nome em texto. Em texto fica nítido em qualquer
+// tela, ao contrário da imagem antiga do logo, que tinha baixa resolução.
+import { Image } from 'astro:assets';
+import iconeVermelho from '@/assets/icone-vermelho.png';
+import iconeBranco from '@/assets/icone-branco.png';
+
+interface Props {
+  claro?: boolean; // true = versão branca, para fundos escuros
+}
+const { claro = false } = Astro.props;
+---
+
+<span class="flex items-center gap-2.5">
+  <Image src={claro ? iconeBranco : iconeVermelho} alt="" class="h-8 w-auto sm:h-9" loading="eager" />
+  <span class="leading-none">
+    <span class:list={['block text-[10px] font-bold tracking-[0.2em] uppercase', claro ? 'text-white/70' : 'text-slate-500']}>
+      Auto Escola
+    </span>
+    <span class:list={['block text-xl font-extrabold tracking-tight sm:text-2xl', claro ? 'text-white' : 'text-marca']}>
+      Querência
+    </span>
+  </span>
+</span>

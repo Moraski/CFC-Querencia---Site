@@ -47,13 +47,19 @@ const abas = Object.keys(categorias) as Categoria[];
           {categorias[c].curto}: a partir de <strong class="text-2xl font-extrabold text-marca">{formatarReais(resumo.aPartirDe, 0)}</strong>
           {' '}à vista ou em até {resumo.parcelas}x no cartão
         </p>
+        <p class="mt-2 text-center text-xs font-semibold text-slate-500 sm:hidden" aria-hidden="true">Deslize para ver os planos →</p>
         <ul
-          class:list={['mt-10 grid gap-6 sm:grid-cols-2', lista.length === 4 ? 'lg:grid-cols-4' : 'lg:mx-auto lg:max-w-5xl lg:grid-cols-3']}
+          class:list={[
+            // Celular: carrossel deslizante. Tablet e computador: grade.
+            'sem-barra -mx-4 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-4 pb-6',
+            'sm:mx-0 sm:mt-10 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pt-0',
+            lista.length === 4 ? 'lg:grid-cols-4' : 'lg:mx-auto lg:max-w-5xl lg:grid-cols-3',
+          ]}
         >
           {lista.map((p) => (
             <li
               class:list={[
-                'relative flex flex-col rounded-3xl border bg-white p-6',
+                'relative flex w-[82%] shrink-0 snap-center flex-col rounded-3xl border bg-white p-6 sm:w-auto',
                 p.destaque ? 'border-marca shadow-2xl shadow-marca/20 ring-2 ring-marca lg:-translate-y-3' : 'border-slate-200',
               ]}
             >
@@ -101,7 +107,7 @@ const abas = Object.keys(categorias) as Categoria[];
                 )}
                 class:list={['mt-6', p.destaque ? 'btn-destaque' : 'btn border-2 border-slate-300 hover:border-marca']}
               >
-                Consultar valor no WhatsApp
+                Consultar valor
               </a>
             </li>
           ))}

@@ -88,6 +88,31 @@ body {
   }
 }
 
+/* Anel que pulsa em volta do botão do WhatsApp, chamando atenção sem incomodar */
+@media (prefers-reduced-motion: no-preference) {
+  .pulso::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--color-whatsapp);
+    z-index: -1;
+    animation: pulsar 2.4s ease-out 2s infinite;
+  }
+}
+@keyframes pulsar {
+  0% { transform: scale(1); opacity: 0.6; }
+  70%, 100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* Carrossel no celular: esconde a barra de rolagem */
+.sem-barra {
+  scrollbar-width: none;
+}
+.sem-barra::-webkit-scrollbar {
+  display: none;
+}
+
 @keyframes subir {
   from {
     opacity: 0;

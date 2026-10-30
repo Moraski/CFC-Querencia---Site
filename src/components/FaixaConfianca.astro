@@ -13,8 +13,8 @@ const itens = [
   <ul class="container-site grid grid-cols-2 gap-4 md:grid-cols-4" data-reveal>
     {
       itens.map((item) => (
-        <li class="rounded-3xl bg-white p-5 text-center shadow-xl shadow-slate-900/5 ring-1 ring-slate-100">
-          <p class="text-3xl font-extrabold text-marca">
+        <li class="rounded-3xl bg-white px-3 py-5 text-center shadow-xl shadow-slate-900/5 ring-1 ring-slate-100">
+          <p class="text-2xl font-extrabold whitespace-nowrap text-marca sm:text-3xl">
             {item.prefixo}
             <span data-contar={item.numero}>{item.numero.toLocaleString('pt-BR')}</span>
             {item.sufixo}
@@ -23,8 +23,8 @@ const itens = [
         </li>
       ))
     }
-    <li class="rounded-3xl bg-white p-5 text-center shadow-xl shadow-slate-900/5 ring-1 ring-slate-100">
-      <p class="text-3xl font-extrabold text-marca">Detran-MT</p>
+    <li class="rounded-3xl bg-white px-3 py-5 text-center shadow-xl shadow-slate-900/5 ring-1 ring-slate-100">
+      <p class="text-2xl font-extrabold whitespace-nowrap text-marca sm:text-3xl">Detran-MT</p>
       <p class="text-sm text-slate-600">CFC credenciado</p>
     </li>
   </ul>

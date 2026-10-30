@@ -8,10 +8,12 @@ import { diferenciais } from '@/data/servicos';
     <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {
         diferenciais.map((d, i) => (
-          <li class="rounded-3xl bg-white/10 p-6 ring-1 ring-white/15 backdrop-blur-sm" data-reveal style={`--atraso: ${i * 80}ms`}>
-            <d.icone class="size-9 text-destaque" stroke-width={1.75} />
-            <h3 class="mt-4 text-lg font-bold">{d.titulo}</h3>
-            <p class="mt-2 text-white/85">{d.texto}</p>
+          <li class="flex gap-4 rounded-3xl bg-white/10 p-5 ring-1 ring-white/15 backdrop-blur-sm sm:block sm:p-6" data-reveal style={`--atraso: ${i * 80}ms`}>
+            <d.icone class="size-9 shrink-0 text-destaque" stroke-width={1.75} />
+            <div>
+              <h3 class="text-lg font-bold sm:mt-4">{d.titulo}</h3>
+              <p class="mt-1 text-white/85 sm:mt-2">{d.texto}</p>
+            </div>
           </li>
         ))
       }

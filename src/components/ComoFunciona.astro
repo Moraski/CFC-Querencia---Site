@@ -11,12 +11,14 @@ import { passos } from '@/data/servicos';
         Primeira habilitação de carro ou moto + carro, do curso teórico até a prova prática. Ficou com dúvida em alguma etapa? A gente te ajuda pelo WhatsApp.
       </p>
     </div>
-    <ol class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <ol class="relative mt-10 grid gap-3 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+      <!-- No celular, uma linha tracejada liga os passos, como uma linha do tempo -->
+      <div class="absolute top-10 bottom-10 left-12 border-l-2 border-dashed border-marca/30 sm:hidden" aria-hidden="true"></div>
       {
         passos.map((p, i) => (
           <li
             class:list={[
-              'relative flex gap-4 rounded-3xl bg-white p-6 shadow-sm',
+              'relative flex gap-4 rounded-3xl bg-white p-5 shadow-sm sm:p-6',
               p.alerta && 'ring-2 ring-destaque',
               p.final && 'sm:col-span-2 lg:col-span-1 lg:col-start-2',
             ]}
