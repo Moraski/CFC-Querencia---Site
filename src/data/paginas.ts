@@ -143,35 +143,4 @@ export const paginas: PaginaServico[] = [
       },
     ],
   },
-  {
-    slug: 'aulas-para-habilitados',
-    titulo: 'Aulas para habilitados em Querência-MT: perca o medo | CFC Querência',
-    descricao:
-      'Tem CNH mas não dirige por medo ou falta de prática? Aulas avulsas de carro ou moto com instrutor em Querência-MT. Agende pelo WhatsApp do CFC Querência.',
-    nome: 'Aulas para habilitados',
-    h1: 'Aulas para quem já tem CNH',
-    chamada:
-      'Tirou a carteira e nunca mais dirigiu? Tem medo da estrada ou de estacionar? Faça aulas avulsas com instrutor, no seu ritmo, até ganhar confiança ao volante.',
-    paraQuem: [
-      'Quem tem CNH mas ficou anos sem dirigir',
-      'Quem tem medo de dirigir sozinho, de estrada ou de estacionar',
-      'Quem comprou o primeiro carro ou a primeira moto e quer mais segurança',
-    ],
-    passos: [
-      { titulo: 'Chame no WhatsApp', texto: 'Conte o que te deixa inseguro e qual veículo quer treinar.' },
-      { titulo: 'Escolha as aulas', texto: 'Você decide quantas aulas fazer. Não tem pacote obrigatório.' },
-      { titulo: 'Treine no seu ritmo', texto: 'O instrutor monta as aulas em cima do que você precisa.' },
-    ],
-    mensagemWhatsApp: 'Olá! Vim pelo site. Já tenho CNH e quero fazer aulas para perder o medo de dirigir.',
-    duvidas: [
-      {
-        pergunta: 'Posso fazer as aulas no meu carro?',
-        resposta: 'Chame no WhatsApp que a gente explica como funciona. O carro da autoescola tem pedal duplo, o que dá mais segurança no começo.',
-      },
-      {
-        pergunta: 'Quantas aulas preciso fazer?',
-        resposta: 'Quantas quiser. Tem gente que resolve em poucas aulas, outros preferem mais. Você decide.',
-      },
-    ],
-  },
 ];
