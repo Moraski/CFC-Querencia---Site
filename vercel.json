@@ -1,0 +1,36 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/autoescola-querencia",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/servicos",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/renovacao-de-cnh",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/elementor-hf/:pagina*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/(sitemap_index|page-sitemap|elementor-hf-sitemap).xml",
+      "destination": "/sitemap-index.xml",
+      "permanent": true
+    },
+    {
+      "source": "/feed",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}

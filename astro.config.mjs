@@ -8,6 +8,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   // Endereço final do site. Usado no sitemap e nas tags de SEO.
   site: 'https://cfcquerencia.com',
+  // Endereços sempre terminam em "/" (ex.: /cnh-moto/), igual ao site antigo em WordPress.
+  // Assim o Google não vê /cnh-moto e /cnh-moto/ como duas páginas diferentes.
+  trailingSlash: 'always',
   // React só é carregado nas "ilhas" interativas (ex.: o simulador).
   integrations: [react(), sitemap()],
   vite: {
