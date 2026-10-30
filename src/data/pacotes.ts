@@ -1,5 +1,6 @@
 // Planos de aulas práticas da Primeira Habilitação.
-// Preços conferidos com o CFC em 29/10/2026.
+// Preços conferidos com o CFC em 29/10/2026. No site aparece só o "a partir de"
+// de cada categoria; o valor de cada plano é passado no WhatsApp.
 
 /** Aparece em letra miúda embaixo dos planos. Atualize junto com os preços. */
 export const validadePrecos = 'outubro de 2026';
@@ -49,23 +50,19 @@ export const incluido: Record<Categoria, string[]> = {
   A: ['Matrícula', '1 exame prático de moto'],
 };
 
-/** Taxas e exames pagos à parte (Detran e clínicas), fora do plano da autoescola. */
-export interface Taxa {
-  nome: string;
-  valor: Record<Categoria, number>;
-}
-
-export const taxas: Taxa[] = [
-  { nome: 'Taxa do Detran', valor: { AB: 320.9, B: 263.9, A: 263.9 } },
-  { nome: 'Exame psicotécnico (Querência)', valor: { AB: 172, B: 172, A: 172 } },
-  { nome: 'Exame médico (Ribeirão Cascalheira)', valor: { AB: 80, B: 80, A: 80 } },
-  // Obrigatório na 1ª CNH A e B desde 2026 (Lei 15.153/2025).
-  { nome: 'Exame toxicológico', valor: { AB: 150, B: 150, A: 150 } },
-];
-
-export const totalTaxas = (c: Categoria) => taxas.reduce((soma, t) => soma + t.valor[c], 0);
-
 export const menorPreco = Math.min(...planos.map((p) => p.aVista));
+
+/** Menor preço à vista e maior número de parcelas de uma categoria ("a partir de"). */
+export const resumoDa = (c: Categoria) => {
+  const lista = planosDa(c);
+  return {
+    aPartirDe: Math.min(...lista.map((p) => p.aVista)),
+    parcelas: Math.max(...lista.map((p) => p.parcelas)),
+  };
+};
+
+/** Taxa do Detran e exames (psicotécnico, médico e toxicológico) são pagos à parte.
+    Os valores não aparecem no site: são passados no atendimento pelo WhatsApp. */
 
 export const formatarReais = (valor: number, casas = 2) =>
   valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: casas, maximumFractionDigits: casas });

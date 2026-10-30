@@ -8,7 +8,7 @@ import { passos } from '@/data/servicos';
     <div data-reveal>
       <h2 class="titulo-secao text-center">Passo a passo da sua CNH</h2>
       <p class="mx-auto mt-3 max-w-2xl text-center text-slate-600">
-        Primeira habilitação de carro ou moto + carro, do curso teórico até a prova prática, com os valores de cada etapa.
+        Primeira habilitação de carro ou moto + carro, do curso teórico até a prova prática. Ficou com dúvida em alguma etapa? A gente te ajuda pelo WhatsApp.
       </p>
     </div>
     <ol class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -32,9 +32,6 @@ import { passos } from '@/data/servicos';
             <div>
               <h3 class="text-lg font-bold text-slate-900">{p.titulo}</h3>
               <p class="mt-1 text-slate-600">{p.texto}</p>
-              {p.valor && (
-                <p class="mt-3 inline-block rounded-full bg-marca/10 px-3 py-1 text-sm font-bold text-marca">{p.valor}</p>
-              )}
               {p.alerta && (
                 <p class="mt-3 flex items-start gap-2 text-sm font-semibold text-amber-800">
                   <TriangleAlert class="mt-0.5 size-4 shrink-0" /> Não faça o exame médico antes do psicotécnico.

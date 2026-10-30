@@ -23,27 +23,23 @@ export const passos = [
   {
     titulo: 'Abertura do processo',
     icone: FileCheck,
-    texto: 'Aqui na autoescola ou no Detran.',
-    valor: 'Taxa Detran: R$ 263,90 (carro) ou R$ 320,90 (moto + carro)',
+    texto: 'Aqui na autoescola ou no Detran. A taxa do Detran é paga direto a ele.',
   },
   {
     titulo: 'Exame psicotécnico',
     icone: Brain,
     texto: 'Feito aqui em Querência.',
-    valor: 'R$ 172,00',
   },
   {
     titulo: 'Exame médico',
     icone: Stethoscope,
     texto: 'Em Ribeirão Cascalheira, sempre depois do psicotécnico.',
-    valor: 'R$ 80,00',
     alerta: true,
   },
   {
     titulo: 'Exame toxicológico',
     icone: FlaskConical,
     texto: 'Obrigatório na primeira CNH desde 2026. O resultado precisa sair antes da CNH provisória.',
-    valor: 'R$ 150,00',
   },
   {
     titulo: 'Prova teórica',

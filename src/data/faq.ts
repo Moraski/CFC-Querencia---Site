@@ -7,9 +7,9 @@ export const faq: { pergunta: string; resposta: string }[] = [
       'O curso teórico é gratuito, pelo aplicativo CNH do Brasil. Depois de concluir, você abre o processo aqui na autoescola ou no Detran.',
   },
   {
-    pergunta: 'Quanto custa no total?',
+    pergunta: 'Quanto custa?',
     resposta:
-      'Além do plano de aulas, taxas e exames são pagos à parte: taxa do Detran R$ 263,90 (só carro) ou R$ 320,90 (moto + carro), exame psicotécnico R$ 172,00, exame médico R$ 80,00 e exame toxicológico R$ 150,00. Use a calculadora na seção de planos para ver o total do seu caso.',
+      'Os planos de aulas começam em R$ 600 à vista. Além do plano, a taxa do Detran e os exames (psicotécnico, médico e toxicológico) são pagos à parte. Chame no WhatsApp que a gente passa o valor certinho para o seu caso.',
   },
   {
     pergunta: 'Em que ordem faço os exames?',
@@ -23,8 +23,7 @@ export const faq: { pergunta: string; resposta: string }[] = [
   },
   {
     pergunta: 'Posso parcelar?',
-    resposta:
-      'Sim, no cartão de crédito. Moto + carro: Básico e Complementar em até 4x, Intermediário e Avançado em até 6x. Só carro: Básico e Complementar em até 4x e Intermediário em até 5x.',
+    resposta: 'Sim, os planos parcelam em até 4x, 5x ou 6x no cartão de crédito, conforme o plano.',
   },
   {
     pergunta: 'Qual a idade mínima?',
